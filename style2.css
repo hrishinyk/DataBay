@@ -127,13 +127,16 @@ nav img{
 }
 
 .action .profile{
-    position: relative;
+    position: fixed;
     border: #fff;
     width: 100px;
     height: 100px;
     border-radius: 50px;
+    right: 50px;
+    top: 50px;
     overflow: hidden;
     cursor: pointer;
+    background: rgb(63, 63, 63);
 }
 
 .action .profile img{
