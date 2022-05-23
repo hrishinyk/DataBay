@@ -1,10 +1,10 @@
-* {
+*{
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
 
-.header {
+.header{
     min-width: 100vh;
     width: 100%;
     background: white;
@@ -13,60 +13,60 @@
     position: relative;
 }
 
-nav {
+nav{
     display: flex;
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
 }
 
-nav img {
+nav img{
     width: 300px;
 }
 
-.nav-links {
+.nav-links{
     flex: 1;
-    text-align: right;
+    text-align:center;
 }
 
-.nav-links ul li {
+.nav-links ul li{
     list-style: none;
     display: inline-block;
-    padding: 8px 12px;
+    padding: 8px 30px;
     position: relative;
 }
 
-.nav-links ul li a {
+.nav-links ul li a{
     color: rgb(0, 0, 0);
     text-decoration: none;
     font-size: 20px;
 }
 
-.nav-links ul li::after {
+.nav-links ul li::after{
     content: '';
     width: 100%;
     height: 2px;
     background: rgb(190, 190, 190);
-    display: block;
     margin: auto;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+    display: block;
     transition: 0.5s;
 }
 
-.nav-links ul li:hover::after {
-    width: 100%;
-}
-
-.text-box {
+.text-box{
     background-color: rgb(218, 218, 218);
 }
 
-.text-box h1 {
+.text-box h1{
     padding-top: 10px;
     font-size: 20px;
     font-weight: normal;
 }
 
-.semester {
+.semester{
     width: 90%;
     height: 350px;
     margin-top: 10px;
@@ -75,24 +75,22 @@ nav img {
     background-color: rgb(126, 126, 126);
 }
 
-.container {
+.container{
     top: 25px;
     left: 20px;
     width: 200px;
     position: relative;
 }
 
-.click {
-    background-color: rgb(255, 187, 0);
+.click{
+    background-color: rgb(255, 187, 0);  
 }
 
-.click1:hover {
+.click:hover{
     background-color: rgb(255, 85, 0);
 }
 
-.click,
-.links {
-    cursor: pointer;
+.click, .links{
     padding: 12px;
     font-size: 1.2em;
     border: none;
@@ -101,22 +99,125 @@ nav img {
     transition: 0.3s;
 }
 
-.list {
+.list{
     position: absolute;
     transform: scaleY(0);
     transform-origin: top;
     transition: 0.3s;
 }
 
-.newlist {
+.newlist{
     transform: scaleY(1);
 }
 
-.links {
+.links{
     background-color: crimson;
 }
 
-.links:hover {
+.links:hover{
     background-color: rgb(255, 0, 51);
     transform: scale(1.1);
+}
+
+.action{
+    position: fixed;
+    top: 65px;
+    right: 85px;
+    background: rgb(63, 63, 63);
+}
+
+.action .profile{
+    position: relative;
+    border: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.action .profile img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.action .menu{
+    position: absolute;
+    top: 80px;
+    right: -10px;
+    padding: 10px 20px;
+    background: rgb(238, 218, 63);
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.action .menu.active{
+    visibility: visible;
+    opacity: 1;
+}
+
+.action .menu::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transform: rotate(45deg);
+}
+
+.action .menu h3{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    line-height: 1.2em;
+}
+
+.action .menu h3 span{
+    font-size: 14px;
+    color: #4d4d4d;
+    font-weight: 400;
+}
+
+.action .menu ul li{
+    list-style: none;
+    padding: 10x 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+}
+
+.action .menu ul li img{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+}
+
+.action .menu ul li:hover img{
+    opacity: 1;
+}
+
+.action .menu ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(120, 120, 120);
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.action .menu ul li:hover a{
+    color: rgb(0, 0, 0);
 }
