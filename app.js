@@ -1,15 +1,20 @@
 const express = require('express');
 var cookies = require("cookie-parser");
 var app = express();
+const router = express.Router();
+const bodyParser = require('body-parser');
+const authController = require('control');
+const mongoose = require('mongoose');
 
 app.use(cookies());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 
 
 app.use('/', express.static(__dirname + '/static'));
-app.use('/auth', require('./routes/auth_page'));
-app.use('/', require('./routes/route_page'));
 
 
 app.listen(1275, () => {
