@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -5,6 +7,7 @@
 }
 
 .header{
+    height: 200px;
     min-width: 100vh;
     width: 100%;
     background: white;
@@ -46,7 +49,7 @@ nav img{
     content: '';
     width: 100%;
     height: 2px;
-    background: rgb(190, 190, 190);
+    background: #03a9f4;
     margin: auto;
 }
 
@@ -57,7 +60,8 @@ nav img{
 }
 
 .text-box{
-    background-color: rgb(218, 218, 218);
+    background: linear-gradient(to right,rgb(200, 200, 200),rgb(221, 221, 221),rgb(200, 200, 200));
+    height: 100px;
 }
 
 .text-box h1{
@@ -72,7 +76,7 @@ nav img{
     margin-top: 10px;
     margin-left: 75px;
     margin-right: 75px;
-    background-color: rgb(126, 126, 126);
+    background: linear-gradient(rgb(0, 0, 89),purple);
 }
 
 .container{
@@ -92,11 +96,13 @@ nav img{
 
 .click, .links{
     padding: 12px;
-    font-size: 1.2em;
-    border: none;
+    font-size: 2em;
+    border-radius: 2px;
+    border-color: transparent;
     outline: none;
-    width: 200px;
+    width: 250px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .list{
@@ -119,6 +125,41 @@ nav img{
     transform: scale(1.1);
 }
 
+.content{
+    position:relative;
+    left: 700px;
+    top: 100px;
+}
+
+.content h2{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    font-size: 6em;
+}
+
+.content h2:nth-child(1)
+{
+    color: transparent;
+    -webkit-text-stroke: 2px #03a9f4;
+}
+
+.content h2:nth-child(2)
+{
+    color: #03a9f4;
+    animation: animate 4s ease-in-out infinite;
+}
+@keyframes animate
+{
+    0%,100%
+    {
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+    50%
+    {
+        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46% , 100% 100%, 0% 100%);
+    }
+}
+
 .action{
     position: fixed;
     top: 65px;
@@ -128,7 +169,6 @@ nav img{
 
 .action .profile{
     position: fixed;
-    border: #fff;
     width: 100px;
     height: 100px;
     border-radius: 50px;
@@ -136,13 +176,11 @@ nav img{
     top: 50px;
     overflow: hidden;
     cursor: pointer;
-    background: rgb(63, 63, 63);
+    background: rgb(164, 164, 164);
 }
 
 .action .profile img{
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -223,4 +261,149 @@ nav img{
 
 .action .menu ul li:hover a{
     color: rgb(0, 0, 0);
+}
+
+.footer{
+    height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgb(203, 203, 203);
+}
+    
+.footer h2{
+    padding-top: 20px;
+    font-weight: lighter;
+}
+
+.footer h3{
+    font-weight: lighter;
+    color: rgb(158, 158, 158);
+}
+
+.wrapper{
+    width: 860px; 
+    margin: 0 auto;
+    align-items: center;
+}
+
+.wrapper ul{
+    list-style: none;
+    margin-top: 2%;
+}
+
+.wrapper ul li {
+
+    background: #262626;
+    width: 500px;
+    border: 1px solid #fff;
+    height: 75px;
+    top: 100px;
+    line-height: 50px;
+    text-align: center;
+    align-items: center;
+    float: left;
+    color: #fff;
+    font-size: 25px;
+    position: relative;
+    font-family: poppins;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.wrapper ul li:hover{
+    background: rgb(86, 177, 252); 
+    }
+    
+.wrapper ul ul{
+    display: none;
+}
+
+.wrapper ul li:hover > ul{
+    display: block;
+}
+
+.wrapper ul ul ul{
+    margin-left: 170px;
+    top: 0;
+    position: absolute;
+}
+
+.wrapper, .branch{
+    padding: 12px;
+    border-radius: 2px;
+    border-color: transparent;
+    outline: none;
+    width: 250px;
+    transition: 0.5s;
+    width: 500px;
+}
+
+.branch{
+    background-color: rgb(128, 137, 255);
+    font-size: large;
+}
+
+.branch:hover{
+    background-color: rgb(188, 195, 255);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/*FAQ.html css*/
+
+.title{
+    font-size: 50px;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    text-decoration: underline 4px;
+    font-weight: lighter;
+}
+
+
+.questions-container{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.question{
+    border-bottom: 1px solid #fff;
+}
+
+.question button{
+    width: 100%;
+    background-color:rgb(0, 255, 128);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    border:none;
+    outline: none;
+    font-size: 22px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    cursor: pointer;
+}
+.question p{
+    font-size: 22px;
+    max-height: 0;
+    opacity: 0;
+    line-height: 1.5;
+    overflow: hidden;
+    transition: all 0.6s ease;
+}
+.d-arrow{
+    transition: transform 0.5s ease-in ;
+    color: #fff;
+}
+
+.question p.show{
+    max-height: 200px; 
+    opacity: 1;
+    padding:0px 15px 30px 15px;
+}
+.question button .d-arrow.rotate{
+    transform: rotate(180deg);
 }
