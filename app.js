@@ -3,7 +3,7 @@ var cookies = require("cookie-parser");
 var app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-const authController = require('control');
+const authController = require('./control');
 const mongoose = require('mongoose');
 
 app.use(cookies());
