@@ -1,58 +1,62 @@
-const Login = require("../Schemas/login");
+//const Login = require("../Schemas/login");
 // const bcryptjs = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
 // const util = require('util');
 // const json = require("json");
-// const { profile } = require('console');
-// const { hasSubscribers } = require('diagnostics_channel');
-// const { lookup } = require('dns');
-// const { accepts } = require('express/lib/request');
-// const { query } = require('express');
-const mongoose = require('mongoose');
+//express = require('express');
+// const app = express();
+const mysql = require('mysql');
+const { emit } = require('nodemon');
+// app.use(express.json());
+// app.use(express.urlencoded());
+// app.use(cors());
+// const mongoose = require('mongoose');
+const path = require('path')
+    // var popup = require('popups');
+    //     // const mongoose = require('mongoose');
+    // var url = "mongodb://localhost:27017/DataBay";
+    // mongoose.connect(url, {
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true,
+    //     autoIndex: true,
+    // });
+    // const db = mongoose.connection;
+    // db.on("error", console.error.bind(console, "connection error: "));
+    // db.once("open", function() {
+    //     console.log("Connected to database successfully");
+    // });
 
-mongoose.connect("mongodb+srv://admin:admin123@databay.tv5wy.mongodb.net/test", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    autoIndex: true,
+let db = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'databay'
 });
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function() {
-    console.log("Connected to database successfully");
+db.connect(() => {
+    console.log("Connected");
+    console.log("Waiting");
 });
-
 
 module.exports.login = (req, res) => {
-    res.status(200).render('login.html');
-    const { email, password } = req.body; //The req. body object allows you to access data in a string or JSON object from the client side
-    Login.findOne({ email: email }, (err, login) => {
-        if (login) {
-            if (password === login.password) {
-                login.password = null;
-                res.send({ message: "Login Succesful", Loginuser: login }); //an object with members message of alert and user with user info for going to specific user page
-            } else {
-                res.send({ message: "Wrong Credentials" });
+    //console.log("C")
+    email = req.body.email;
+    password = req.body.password;
+
+    sql = "select * from login where email = ?";
+    db.query(sql, [email], (err, result) => {
+
+        if (result.length > 0) {
+            var pass = result[0].password;
+            if (pass == password) {
+                res.sendFile(path.join(__dirname, '../views/index.html'));
             }
         } else {
-            res.send({ message: "Sorry! You have not registered" });
+            // res.sendFile(path.join(__dirname, '../views/404.html'));
+            //alert("Incorrect Credentials");
+            res.sendFile(path.join(__dirname, '../views/404.html'));
+        }
+        if (err) {
             console.log(err);
         }
-    });
+    })
 }
-
-// app.post("/Login", (req, res) => {
-//     const { email, password } = req.body; //The req. body object allows you to access data in a string or JSON object from the client side
-//     Login.findOne({ email: email }, (err, login) => {
-//         if (login) {
-//             if (password === login.password) {
-//                 login.password = null;
-//                 res.send({ message: "Login Succesful", Loginuser: login }); //an object with members message of alert and user with user info for going to specific user page
-//             } else {
-//                 res.send({ message: "Wrong Credentials" });
-//             }
-//         } else {
-//             res.send({ message: "Sorry! You have not registered" });
-//             console.log(err);
-//         }
-//     });
-// })
