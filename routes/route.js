@@ -5,7 +5,7 @@ const path = require('path')
 
 router.get('/', (req, res) => {
     res.status(200);
-    res.sendFile(path.join(__dirname, '../views/login.html'));
+    res.render(path.join(__dirname, '../views/login.ejs'));
 });
 
 router.get('/branch', (req, res) => {
