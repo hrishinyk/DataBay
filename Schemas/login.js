@@ -4,7 +4,7 @@ const loginSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        required: [true, "email ID is required"],
+        required: true,
     },
     password: {
         type: String,
@@ -14,4 +14,4 @@ const loginSchema = new mongoose.Schema({
     }
 });
 
-module.exports = new mongoose.model("Login", loginSchema);
+module.exports = mongoose.model('Login', loginSchema, 'Login');
