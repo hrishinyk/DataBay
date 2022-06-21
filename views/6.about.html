@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBay</title>
+    <link rel="stylesheet" href="/static/style2.css">
+</head>
+
+<body>
+    <section class="header">
+        <nav>
+            <a href="#"><img src="/static/DataBay LogoB.png"></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="/index">HOME</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/chatbox">CHATBOX</a></li>
+                </ul>
+            </div>
+            <div class="action">
+                <div class="profile" onclick="menuToggle();">
+                    <img src="/static/face-detection.png">
+                </div>
+                <div class="menu">
+                    <h3>Name<br><span>Profession</span></h3>
+                    <ul>
+                        <li>
+                            <a href="/profile">
+                                <ion-icon name="person-circle-sharp"></ion-icon>My Profile</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#">
+                                <ion-icon name="create"></ion-icon>Edit Profile</a>
+                        </li> -->
+                        <li>
+                            <a href="/auth/signout">
+                                <ion-icon name="log-out-outline"></ion-icon>Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </section>
+    <section class="FAQ">
+        <h1 class="title">ABOUT</h1>
+
+        <div class="questions-container">
+            <div class="question">
+                <button>
+                        <span>Test Question 1</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                <p>Test Answer 1</p>
+            </div>
+
+            <div class="question">
+                <button>
+                        <span>Test Question 2</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                <p>Test Answer 2</p>
+            </div>
+
+            <div class="question">
+                <button>
+                        <span>Test Question 3</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                <p>Test Answer 3</p>
+            </div>
+
+            <div class="question">
+                <button>
+                        <span>Test Question 4</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                <p>Test Answer 4</p>
+            </div>
+
+            <div class="question">
+                <button>
+                        <span>Test Question 5</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                <p>Test Answer 5</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wavesec">
+        <div class="waves">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+            <div class="wave wave4"></div>
+        </div>
+        <div class="toot">
+            <p>©DataBay 2022</p>
+        </div>
+    </section>
+    <!-- <div class="footer" align="center">
+            <h2>End of page</h2>
+            <h3>©DataBay</h3>
+        </div> -->
+
+    <script src="/static/index.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
