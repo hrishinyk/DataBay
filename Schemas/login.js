@@ -24,6 +24,9 @@ const loginSchema = new mongoose.Schema({
     isAdmin: {
         type: String,
     },
+    secretKey: {
+        type: String,
+    },
     // picture: {
     //     type: Binary,
     // }

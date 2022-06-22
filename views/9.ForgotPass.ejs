@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBay</title>
+    <link rel="stylesheet" href="/static/style2.css">
+</head>
+
+<body>
+    <div class="forpass">
+        <div class="forpasstop">
+            <h2 class="forpasstxt">Change Of Password</h2>
+        </div>
+        <div class="forpassbot">
+            <form action="/auth/forgotpassword" method="post">
+                <div class="forpassmini">
+                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                    <input class="form-control" id="inputEmailAddress" type="text" name="email" placeholder="Enter your email address"><br>
+                </div>
+                <div class="forpassmini">
+                    <label class="small mb-1" for="inputPassword">Enter your secret key</label>
+                    <input class="form-control" id="inputSecret" type="text" name="secretKey" placeholder="Enter Secret Key"><br>
+                </div>
+                <div class="forpassmini">
+                    <label class="small mb-1" for="inputPassword">Enter your new password</label>
+                    <input class="form-control" id="inputPassword" type="password" name="password" placeholder="Enter password"><br>
+                </div>
+                <div class="forpassmini">
+                    <label class="small mb-1" for="inputPassword">Confirm password</label>
+                    <input class="form-control" id="confirmPassword" type="password" name="confirmPass" placeholder="Enter password again"><br>
+                    <br>
+                </div>
+                <input class="button-19" type="submit" value="Save changes">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

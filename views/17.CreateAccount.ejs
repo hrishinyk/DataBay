@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBay</title>
+    <link rel="stylesheet" href="/static/style3.css">
+</head>
+
+<body>
+    <div class="Navbar">
+        <nav class="nav" id="nav-menu">
+            <ion-icon name="close-outline" class="header__close" id="close-menu"></ion-icon>
+
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="" class="nav__link">
+                        <ion-icon name="home-outline"></ion-icon>&nbspHOME</a>
+                </li>
+                <li class="nav__item"><a href="" class="nav__link">FAQ</a></li>
+                <li class="nav__item"><a href="" class="nav__link">ABOUT</a></li>
+                <li class="nav__item"><a href="" class="nav__link">CHATBOX</a></li>
+                <li class="nav__item"><a href="" class="nav__link">DEADLINES</a></li>
+                <li class="nav__item"><a href="" class="nav__link">CREATE ACCOUNT</a></li>
+            </ul>
+        </nav>
+
+        <ion-icon name="menu-outline" class="header__toggle" id="toggle-menu"></ion-icon>
+        <div class="logo">
+            <img src="/static/Databay LogoW.png" alt="">
+        </div>
+        <p class="admintxt">A D M I N</p>
+    </div>
+    <div class="navline"></div>
+    <div class="megacrtact">
+        <div class="crtact">
+            <div class="crtacttop">
+                <h1 class="drh2">Create New Account</h1><br>
+                <ion-icon size="large" name="create-outline"></ion-icon>
+                <p>Enter details:</p><br>
+            </div>
+
+            <div class="crtactbot">
+                <form action="/auth/createAcc" method="post">
+                    <div class="crtactmini">
+                        <label class="small mb-1" for="inputEmailAddress">Create Email address:</label>
+                        <input class="DataSel2" id="inputEmailAddress" name="email" type="email" placeholder="Enter your email address"><br>
+                    </div>
+                    <div class="crtactmini">
+                        <label class="small mb-1" for="inputPassword">Create Password:</label>
+                        <input class="DataSel2" id="inputPassword" name="password" type="password" placeholder="Enter password"><br>
+                    </div>
+                    <div class="crtactmini">
+                        <label class="small mb-1" for="AccountType">Select Account Type:</label>
+                        <select id="AccountType" name="type" class="DataSel2">
+                            <option selected disabled>Select</option>
+                            <option value="false">Faculty</option>
+                            <option value="true">Admin</option>
+                            </select>
+                        <br><br>
+                    </div>
+                    <button class="button-20" type="submit">Create Account</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <section class="wavesec">
+        <div class="waves">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+            <div class="wave wave3"></div>
+            <div class="wave wave4"></div>
+        </div>
+        <div class="toot">
+            <p>©DataBay 2022</p>
+        </div>
+    </section>
+
+    <script src="/static/script.js"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
