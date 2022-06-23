@@ -11,20 +11,21 @@
 
 <body>
     <div class="uploadbox">
-        <div class="inneruploadbox">
-            <header class="upboxhead">DataBay File Upload</header>
-            <form class="uploadform" action="#">
-                <input class="file-input" type="file" name="file" hidden>
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p>Browse File to Upload</p>
+        <div class="uploadboxout">
+            <h2>DataBay File Upload</h2>
+            <i class="fas fa-cloud-upload-alt" id="cloud"></i>
+            <div class="uploadboxin">
+                <form>
+                    <input type="file" class="customfile">
+                    <br><br>
+                    <p class="area52">Browse File to Upload
+                        <p>
+            </div>
+            <button class="button-17" type="submit" value="Submit">Upload</button>
+            <button class="button-18" type="reset" value="Reset">Reset</button>
             </form>
-            <section class="progress-area" id="uploadsec"></section>
-            <section class="uploaded-area" id="uploadsec"></section>
         </div>
     </div>
-
-    <script src="/static/script2.js"></script>
-
 </body>
 
 </html>

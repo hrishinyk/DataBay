@@ -10,12 +10,13 @@
 </head>
 
 <body>
-    <section class="header">
+    <%- include('partials/head'); %>
+        <!-- <section class="header">
         <nav>
             <a href="#"><img src="/static/DataBay LogoB.png"></a>
             <div class="nav-links">
                 <ul>
-                    <li><a href="/index">HOME</a></li>
+                    <li><a href="/auth/index">HOME</a></li>
                     <li><a href="/about">ABOUT</a></li>
                     <li><a href="/faq">FAQ</a></li>
                     <li><a href="/chatbox">CHATBOX</a></li>
@@ -23,19 +24,15 @@
             </div>
             <div class="action">
                 <div class="profile" onclick="menuToggle();">
-                    <img src="/static/face-detection.png">
+                    <img src="face-detection.png">
                 </div>
                 <div class="menu">
                     <h3>Name<br><span>Profession</span></h3>
                     <ul>
                         <li>
-                            <a href="/profile">
+                            <a href="/auth/editProfile">
                                 <ion-icon name="person-circle-sharp"></ion-icon>My Profile</a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <ion-icon name="create"></ion-icon>Edit Profile</a>
-                        </li> -->
                         <li>
                             <a href="/auth/signout">
                                 <ion-icon name="log-out-outline"></ion-icon>Sign Out</a>
@@ -45,15 +42,15 @@
             </div>
         </nav>
 
-    </section>
-    <div class="megabranchsel">
-        <div class="branchsel1">
-            <h2 class="bsh2">Branch Selection</h2>
-        </div>
-        <div class="branchsel2">
+    </section> -->
+        <div class="megabranchsel">
+            <div class="branchsel1">
+                <h2 class="bsh2">Branch & Semester Selection</h2>
+            </div>
             <form action="/auth/selectBranch" method="post">
-                <label for="Branch">Select Branch:</label><br><br>
-                <select name="Branch" id="Branch" class="BranchSelection">
+                <div class="branchsel2">
+                    <label for="Branch">Select Branch:</label><br><br>
+                    <select name="Branch" id="Branch" class="BranchSelection">
                 <option selected disabled>Select</option>    
                 <option value="cse">Computer Science and Engineering</option>
                 <option value="ise">Information Science and Engineering</option>
@@ -62,25 +59,38 @@
                 <option value="eee">Electrical and Electronics Engineering</option>
                 <option value="ece">Electronics and Communications Engineering</option>
                 </select>
-                <br><br>
-                <button class="brselbtn" type="submit" value="Submit">Submit</button>
+                    <br><br>
+                    <label for="Semester">Select Semester:</label><br><br>
+                    <select name="Semester" id="Semester" class="BranchSelection">
+                <option selected disabled>Select</option>    
+                <option value="sem1">1st Semester</option>
+                <option value="sem2">2nd Semester</option>
+                <option value="sem3">3rd Semester</option>
+                <option value="sem4">4th Semester</option>
+                <option value="sem5">5th Semester</option>
+                <option value="sem6">6th Semester</option>
+                <option value="sem7">7th Semester</option>
+                <option value="sem8">8th Semester</option>
+                </select>
+                    <br><br>
+                    <button class="brselbtn" type="submit" value="Submit">Submit</button>
+                </div>
             </form>
         </div>
-    </div>
-    <section class="wavesec">
-        <div class="waves">
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
-            <div class="wave wave4"></div>
-        </div>
-        <div class="toot">
-            <p>©DataBay 2022</p>
-        </div>
-    </section>
-    <script src="/static/index.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <section class="wavesec">
+            <div class="waves">
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+                <div class="wave wave4"></div>
+            </div>
+            <div class="toot">
+                <p>©DataBay 2022</p>
+            </div>
+        </section>
+        <script src="/static/index.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

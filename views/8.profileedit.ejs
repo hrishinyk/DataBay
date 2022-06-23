@@ -13,84 +13,95 @@
     <section class="header">
         <nav>
             <a href="#"><img src="/static/DataBay LogoB.png"></a>
-            <div class="nav-links">
+            <!-- <div class="nav-links">
                 <ul>
                     <li><a href="/auth/index">HOME</a></li>
                     <li><a href="/about">ABOUT</a></li>
                     <li><a href="/faq">FAQ</a></li>
                     <li><a href="/chatbox">CHATBOX</a></li>
                 </ul>
-            </div>
+            </div> -->
         </nav>
 
     </section>
     <section class="mega-choco">
         <div class="choco">
             <div class="row">
-                <div class="choco3" align="center">
-                    <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
-                        <div class="choco5">
-                            <h3>Profile Picture</h3><br>
-                            <!-- Profile picture image-->
-                            <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                            <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div><br>
-                            <!-- Profile picture upload button-->
-                            <button class="button-17" type="button">Upload new image</button>
+                <form action="/auth/changeDetails" method="post">
+                    <div class="choco3" align="center">
+                        <!-- Profile picture card-->
+                        <div class="card mb-4 mb-xl-0">
+                            <div class="choco5">
+                                <h3>Profile Picture</h3><br>
+                                <!-- Profile picture image-->
+                                <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <!-- Profile picture help block-->
+                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div><br>
+                                <!-- Profile picture upload button-->
+                                <button class="button-17" type="button">Upload new image</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="account">
-                    <!-- Account details card-->
-                    <div class="account1">
-                        <div class="account2">
-                            <h2 align="center">Account Details</h2><br>
-                            <form>
+                    <div class="account">
+                        <!-- Account details card-->
+                        <div class="account1">
+                            <div class="account2">
+                                <h2 align="center">Account Details</h2><br>
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (first name)-->
                                     <div class="col-md-6">
+                                        <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                        <input class="form-control" name="email" id="inputEmailAddress" type="email" value="<% if (user) { %><%= user.email %><% } %>" disabled><br>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label class="small mb-1" for="inputFirstName">First name</label>
-                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Mayur"><br>
+                                        <input class="form-control" name="Fname" id="inputFirstName" type="text" placeholder="Enter your first name" value="<% if (user) { %><%= user.Fname %><% } %>"><br>
                                     </div>
                                     <!-- Form Group (last name)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputLastName">Last name</label>
-                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Joshi"><br>
+                                        <input class="form-control" name="Lname" id="inputLastName" type="text" placeholder="Enter your last name" value="<% if (user) { %><%= user.Lname %><% } %>"><br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="inputPassword">Enter your secret key</label>
+                                        <input class="form-control" id="inputSecret" type="text" name="secretKey" placeholder="Enter Secret Key" value="<% if (user) { %><%= user.secretKey %><% } %>"><br>
                                     </div>
                                 </div>
                                 <!-- Form Row        -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (email)-->
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                        <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@nie.ac.in"><br>
-                                    </div>
+                                        <input class="form-control" name="email" id="inputEmailAddress" type="email" value="<% if (user) { %>
+                                                <%= user.email %>
+                                            <% } %>" disabled><br>
+                                    </div> -->
                                 </div>
                                 <!-- Form Row-->
-                                <div class="row gx-3 mb-3">
+                                <!-- <div class="row gx-3 mb-3">
                                     <h3 class="passwordchange">Change Password:</h3><br>
-                                    <!-- Form Group (password)-->
+                                    Form Group (password)
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPassword">Enter your old password</label>
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" value="Password"><br>
+                                        <input class="form-control" name="oldPassword" id="inputPassword" type="password" placeholder="Enter password" value="Password"><br>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPassword">Enter your new password</label>
-                                        <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" value="Password"><br>
+                                        <input class="form-control" name="" id="inputPassword" type="password" placeholder="Enter password" value="Password"><br>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputPassword">Confirm password</label>
                                         <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" value="Password"><br>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Save changes button-->
                                 <br>
                                 <button class="button-18" type="submit">Save changes</button>
-                            </form>
-                        </div>
-                    </div>
+                                <button class="button-16"><a href="/forgotpass">Change Password</a></button>
+                </form>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

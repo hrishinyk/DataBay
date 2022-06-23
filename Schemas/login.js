@@ -15,7 +15,10 @@ const loginSchema = new mongoose.Schema({
     isUpdated: {
         type: String,
     },
-    name: {
+    Fname: {
+        type: String,
+    },
+    Lname: {
         type: String,
     },
     phone: {
@@ -27,10 +30,13 @@ const loginSchema = new mongoose.Schema({
     secretKey: {
         type: String,
     },
-    // picture: {
-    //     type: Binary,
-    // }
-
+    img: {
+        data: Buffer,
+        contentType: String
+    },
+    loggedIn: {
+        type: String,
+    },
 });
 
 module.exports = mongoose.model('Login', loginSchema, 'Login');

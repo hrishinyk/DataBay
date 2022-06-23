@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <div class="Navbar">
+    <%- include('partials/headAdmin'); %>
+        <!-- <div class="Navbar">
         <nav class="nav" id="nav-menu">
             <ion-icon name="close-outline" class="header__close" id="close-menu"></ion-icon>
 
@@ -36,10 +37,6 @@
                             <a href="/profile">
                                 <ion-icon name="person-circle-sharp"></ion-icon>My Profile</a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <ion-icon name="create"></ion-icon>Edit Profile</a>
-                        </li> -->
                         <li>
                             <a href="/auth/signout">
                                 <ion-icon name="log-out-outline"></ion-icon>Sign Out</a>
@@ -54,29 +51,29 @@
             <img src="/static/Databay LogoW.png" alt="">
         </div>
         <p class="admintxt">A D M I N</p>
-    </div>
-    <div class="navline"></div>
+    </div> -->
+        <div class="navline"></div>
 
-    <div class="page2">
-        <div class="divide-child 1">
-            <div class="dataformtop">
-                <h1 class="drh2">Data Retrieval</h1><br>
-                <ion-icon size="large" name="cloud-download-outline" class="downloadimg"></ion-icon>
-                <p>Select your requirements:</p><br>
-            </div>
-            <div class="dataformbot">
-                <form>
-                    <label for="Year">Select Year:</label>
-                    <select name="Year" id="Year" class="DataSel">
+        <div class="page2">
+            <div class="divide-child 1">
+                <div class="dataformtop">
+                    <h1 class="drh2">Data Retrieval</h1><br>
+                    <ion-icon size="large" name="cloud-download-outline" class="downloadimg"></ion-icon>
+                    <p>Select your requirements:</p><br>
+                </div>
+                <div class="dataformbot">
+                    <form>
+                        <label for="Year">Select Year:</label>
+                        <select name="Year" id="Year" class="DataSel">
                         <option selected disabled>Select</option>
                         <option value="year1" siz>Ist Year</option>
                         <option value="year2">IInd Year</option>
                         <option value="year3">IIIrd Year</option>
                         <option value="year4">IVth Year</option>
                         </select>
-                    <br><br>
-                    <label for="Semester">Select Semester:</label>
-                    <select name="Semester" id="Semester" class="DataSel">
+                        <br><br>
+                        <label for="Semester">Select Semester:</label>
+                        <select name="Semester" id="Semester" class="DataSel">
                         <option selected disabled>Select</option>    
                         <option value="sem1">1st Semester</option>
                         <option value="sem2">2nd Semester</option>
@@ -87,9 +84,9 @@
                         <option value="sem7">7th Semester</option>
                         <option value="sem8">8th Semester</option>
                         </select>
-                    <br><br>
-                    <label for="Branch">Select Branch:</label>
-                    <select name="Branch" id="Branch" class="DataSel">
+                        <br><br>
+                        <label for="Branch">Select Branch:</label>
+                        <select name="Branch" id="Branch" class="DataSel">
                         <option selected disabled>Select</option>    
                         <option value="cse">CSE</option>
                         <option value="ise">ISE</option>
@@ -98,49 +95,71 @@
                         <option value="eee">EEE</option>
                         <option value="ece">ECE</option>
                         </select>
-                    <br><br>
-                    <label for="Doc">Select Document:</label>
-                    <select name="Doc" id="Doc" class="DataSel">
+                        <br><br>
+                        <label for="Doc">Select Document:</label>
+                        <select name="Doc" id="Doc" class="DataSel">
                         <option selected disabled>Select</option>    
                         <option value="Doc1">Micro Assessment</option>
                         <option value="Doc2">CO-PO Mapping</option>
                         <option value="Doc3">CO Feedback</option>
                         <option value="Doc4">NBA Feedback</option>
                         </select>
-                    <br><br>
-                    <button type="submit" value="Submit" class="sub">Submit</button>
-                    <button type="reset" value="Reset" class="res">Reset</button>
-                </form>
+                        <br><br>
+                        <button type="submit" value="Submit" class="sub">Submit</button>
+                        <button type="reset" value="Reset" class="res">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="divide-child 2">
+                <div class="onlinetop">
+                    <h1 class="oth2">Users Online</h1><br>
+                    <ion-icon size="large" name="people-outline"></ion-icon><br>
+                    <p>Recent 5 active users:</p>
+                </div>
+                <div class="onlinebot">
+                    <ol class="onlineusers">
+                        <li>
+                            <% if (user) { %>
+                                <%= user[0].Fname+user[0].Lname %>
+                                    <% } %>
+                        </li>
+                        <li>
+                            <% if (user) { %>
+                                <%= user[0].Fname+user[1].Lname %>
+                                    <% } %>
+                        </li>
+                        <li>
+                            <% if (user) { %>
+                                <%= user[0].Fname+user[2].Lname %>
+                                    <% } %>
+                        </li>
+                        <!-- <li><% if (user) { %>
+                    <%= user[0].Fname+user[0].Lname %>
+                        <% } %></li>
+                <li><% if (user) { %>
+                    <%= user[0].Fname+user[0].Lname %>
+                        <% } %></li> -->
+                    </ol>
+                </div>
             </div>
         </div>
-        <div class="divide-child 2">
-            <div class="onlinetop">
-                <h1 class="oth2">Users Online</h1><br>
-                <ion-icon size="large" name="people-outline"></ion-icon><br>
-                <p>in the past 5 minutes:</p>
+        <section class="wavesec">
+            <div class="waves">
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+                <div class="wave wave4"></div>
             </div>
-            <div class="onlinebot">
-                <ul class="onlineusers"></ul>
+            <div class="toot">
+                <p>©DataBay 2022</p>
             </div>
-        </div>
-    </div>
-    <section class="wavesec">
-        <div class="waves">
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
-            <div class="wave wave4"></div>
-        </div>
-        <div class="toot">
-            <p>©DataBay 2022</p>
-        </div>
-    </section>
+        </section>
 
-    <script src="/static/index.js"></script>
-    <script src="/static/script.js"></script>
+        <script src="/static/index.js"></script>
+        <script src="/static/script.js"></script>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

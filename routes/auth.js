@@ -12,8 +12,13 @@ router.get('/signout', authController.signout);
 router.post('/selectBranch', authController.isLogIn, authController.selectBranch);
 router.post('/getData', urlencodedParser, authController.isLogIn, authController.getData);
 router.post('/setDeadlines', urlencodedParser, authController.setDeadlines);
-router.get('/index', authController.isLogIn, authController.printDeadlines);
+router.get('/index', authController.isLogIn, authController.printHomeDeadlines);
 router.post('/createAcc', urlencodedParser, authController.createAcc);
+router.get('/editProfile', authController.isLogIn, authController.editProfile);
+router.post('/changeDetails', urlencodedParser, authController.isLogIn, authController.changeDetails);
+router.get('/docs', authController.isLogIn, authController.printCheckDeadlines);
+
+router.get('/adminHome', authController.activeUsers);
 
 // router.get('/input/:br/copo', urlencodedParser, authController.input);
 // router.post('/profileupdate', urlencodedParser, authController.profileUpdate)

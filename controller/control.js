@@ -7,6 +7,7 @@ const json = require("json");
 const methodOverride = require('method-override');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
+const fs = require('fs');
 // express = require('express');
 // const app = express();
 // const mysql = require('mysql');
@@ -29,12 +30,17 @@ db.once("open", function() {
     console.log("Connected to database successfully");
 });
 
-// let gfs;
-// db.once('open', () => {
-//     gfs = new mongoose.mongo.GridFSBucket(db.db, {
-//         bucketName: "uploads"
-//     });
-// });
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+
+var upload = multer({ storage: storage });
+
 
 module.exports.login = (req, res) => {
     // console.log("C");
@@ -144,7 +150,7 @@ module.exports.adminLogin = (req, res) => {
                             httpOnly: true
                         }
                         // console.log("Logged in");
-                    res.cookie('owner', token, cookieoption).redirect('/adminHome');
+                    res.cookie('owner', token, cookieoption).redirect('/auth/adminHome');
                 } else {
                     res.render(path.join(__dirname, '../views/404-A.ejs'));
                     // res.render('index', { message: 'Incorrect Credentials', color: '<div class="alert alert-danger" role="alert">' });
@@ -202,7 +208,13 @@ module.exports.renderProfile = (req, res) => {
 
     // console.log(req.data.isAdmin);
     if (req.data.isUpdated == "false") {
-        res.status(200).render(path.join(__dirname, '../views/8.profileedit.ejs'));
+        u = {
+            Fname: req.data.Fname,
+            Lname: req.data.Lname,
+            secretKey: req.data.secretKey,
+            email: req.data.email,
+        };
+        res.status(200).render(path.join(__dirname, '../views/8.profileedit.ejs'), { user: u });
     } else {
         // console.log(req.cookie.deadlines);
         // u = { Notification1: "Hello" };
@@ -224,14 +236,25 @@ module.exports.renderProfile = (req, res) => {
     }
 }
 
+module.exports.editProfile = (req, res) => {
+    u = {
+        Fname: req.data.Fname,
+        Lname: req.data.Lname,
+        secretKey: req.data.secretKey,
+        email: req.data.email,
+    };
+    res.status(200).render(path.join(__dirname, '../views/8.profileedit.ejs'), { user: u });
+}
+
 module.exports.selectBranch = (req, res) => {
     // req.data.branch = req.body.Branch;
     // console.log("Changed cookie");
     let upload = {
-        branch: req.body.Branch
+        branch: req.body.Branch,
+        semester: req.body.Semester
     }
     res.cookie("uploadData", upload);
-    res.redirect('/docs');
+    res.redirect('/auth/docs');
     // res.status(200).render(path.join(__dirname, '../views/4.check.ejs'));
 }
 
@@ -270,7 +293,7 @@ module.exports.setDeadlines = (req, res) => {
     });
 }
 
-module.exports.printDeadlines = (req, res) => {
+module.exports.printHomeDeadlines = (req, res) => {
     DeadlinesModel.find({
             type: "deadlines"
         })
@@ -282,6 +305,21 @@ module.exports.printDeadlines = (req, res) => {
                 Notification3: doc[0].Notification3,
             }
             res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u });
+        })
+}
+
+module.exports.printCheckDeadlines = (req, res) => {
+    DeadlinesModel.find({
+            type: "deadlines"
+        })
+        .then(doc => {
+            // console.log(doc);
+            u = {
+                Notification1: doc[0].Notification1,
+                Notification2: doc[0].Notification2,
+                Notification3: doc[0].Notification3,
+            }
+            res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { user: u });
         })
 }
 
@@ -297,4 +335,30 @@ module.exports.createAcc = (req, res) => {
         secretKey: ""
     });
     res.redirect('/adminHome');
+}
+
+module.exports.changeDetails = (req, res) => {
+    const query = { email: req.data.email };
+    LoginModel.findOneAndUpdate(query, {
+        Fname: req.body.Fname.trim(),
+        Lname: req.body.Lname.trim(),
+        secretKey: req.body.secretKey.trim(),
+        isUpdated: "true"
+    }, { upsert: true }, function(err, doc) {
+        if (err) return res.send(500, { error: err });
+        res.redirect('/auth/index');
+        // return res.send('Succesfully saved.');
+    });
+}
+
+module.exports.activeUsers = (req, res) => {
+    LoginModel.find({
+            loggedIn: "false",
+            // isAdmin: "false"
+        })
+        .then(doc => {
+            u = doc;
+            res.status(200).render(path.join(__dirname, '../views/12.Home.ejs'), { user: u });
+            // console.log(doc);
+        })
 }

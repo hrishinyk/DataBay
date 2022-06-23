@@ -51,9 +51,9 @@ router.get('/chatbox', (req, res) => {
     res.status(200).render(path.join(__dirname, '../views/15.Chatbox.ejs'))
 })
 
-router.get('/adminHome', (req, res) => {
-    res.status(200).render(path.join(__dirname, '../views/12.Home.ejs'))
-})
+// router.get('/adminHome', (req, res) => {
+//     res.status(200).render(path.join(__dirname, '../views/12.Home.ejs'))
+// })
 
 router.get('/adminfaq', (req, res) => {
     res.status(200).render(path.join(__dirname, '../views/13.FAQ-Admin.ejs'))
@@ -75,17 +75,18 @@ router.get('/adminchat', (req, res) => {
     res.status(200).render(path.join(__dirname, '../views/15.Chatbox.ejs'))
 })
 
-router.get('/profile', (req, res) => {
-    res.status(200).render(path.join(__dirname, '../views/8.profileedit.ejs'))
-})
+// router.get('/profile', (req, res) => {
+//     res.status(200).render(path.join(__dirname, '../views/8.profileedit.ejs'))
+// })
 
 router.get('/forgotpass', (req, res) => {
     res.status(200).render(path.join(__dirname, '../views/9.ForgotPass.ejs'))
 })
 
-router.get('/docs', (req, res) => {
-    res.status(200).render(path.join(__dirname, '../views/4.check.ejs'))
-})
+// router.get('/docs', (req, res) => {
+//     // res.send(req.cookies);
+//     res.status(200).render(path.join(__dirname, '../views/4.check.ejs'))
+// })
 
 router.get('/upload', (req, res) => {
     res.status(200).render(path.join(__dirname, '../views/5.Upload.ejs'))

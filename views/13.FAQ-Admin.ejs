@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <div class="Navbar">
+    <%- include('partials/headAdmin'); %>
+        <!-- <div class="Navbar">
         <nav class="nav" id="nav-menu">
             <ion-icon name="close-outline" class="header__close" id="close-menu"></ion-icon>
 
@@ -36,10 +37,6 @@
                             <a href="/profile">
                                 <ion-icon name="person-circle-sharp"></ion-icon>My Profile</a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <ion-icon name="create"></ion-icon>Edit Profile</a>
-                        </li> -->
                         <li>
                             <a href="/auth/signout">
                                 <ion-icon name="log-out-outline"></ion-icon>Sign Out</a>
@@ -54,72 +51,72 @@
             <img src="/static/Databay LogoW.png" alt="">
         </div>
         <p class="admintxt">A D M I N</p>
-    </div>
-    <div class="navline"></div>
+    </div> -->
+        <div class="navline"></div>
 
-    <section class="FAQ">
-        <h1 class="title">Frequently Asked Questions</h1>
+        <section class="FAQ">
+            <h1 class="title">Frequently Asked Questions</h1>
 
-        <div class="questions-container">
-            <div class="question">
-                <button>
+            <div class="questions-container">
+                <div class="question">
+                    <button>
                     <span>Test Question 1</span>
                     <i class="fas fa-chevron-down d-arrow"></i>
                 </button>
-                <p>Test Answer 1</p>
-            </div>
+                    <p>Test Answer 1</p>
+                </div>
 
-            <div class="question">
-                <button>
+                <div class="question">
+                    <button>
                     <span>Test Question 2</span>
                     <i class="fas fa-chevron-down d-arrow"></i>
                 </button>
-                <p>Test Answer 2</p>
-            </div>
+                    <p>Test Answer 2</p>
+                </div>
 
-            <div class="question">
-                <button>
+                <div class="question">
+                    <button>
                     <span>Test Question 3</span>
                     <i class="fas fa-chevron-down d-arrow"></i>
                 </button>
-                <p>Test Answer 3</p>
-            </div>
+                    <p>Test Answer 3</p>
+                </div>
 
-            <div class="question">
-                <button>
+                <div class="question">
+                    <button>
                     <span>Test Question 4</span>
                     <i class="fas fa-chevron-down d-arrow"></i>
                 </button>
-                <p>Test Answer 4</p>
-            </div>
+                    <p>Test Answer 4</p>
+                </div>
 
-            <div class="question">
-                <button>
+                <div class="question">
+                    <button>
                     <span>Test Question 5</span>
                     <i class="fas fa-chevron-down d-arrow"></i>
                 </button>
-                <p>Test Answer 5</p>
+                    <p>Test Answer 5</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="wavesec">
-        <div class="waves">
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
-            <div class="wave wave4"></div>
-        </div>
-        <div class="toot">
-            <p>©DataBay 2022</p>
-        </div>
-    </section>
+        <section class="wavesec">
+            <div class="waves">
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+                <div class="wave wave4"></div>
+            </div>
+            <div class="toot">
+                <p>©DataBay 2022</p>
+            </div>
+        </section>
 
-    <script src="/static/script.js"></script>
-    <script src="/static/index.js"></script>
+        <script src="/static/script.js"></script>
+        <script src="/static/index.js"></script>
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

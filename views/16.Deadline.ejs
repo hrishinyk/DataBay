@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <div class="Navbar">
+    <%- include('partials/headAdmin'); %>
+        <!-- <div class="Navbar">
         <nav class="nav" id="nav-menu">
             <ion-icon name="close-outline" class="header__close" id="close-menu"></ion-icon>
 
@@ -32,56 +33,57 @@
             <img src="/static/Databay LogoW.png" alt="">
         </div>
         <p class="admintxt">A D M I N</p>
-    </div>
-    <div class="navline"></div>
+    </div> -->
+        <div class="navline"></div>
 
-    <div class="deadline">
-        <div class="deadlinetop">
-            <h1 class="drh2">Assign Deadlines</h1><br>
-            <ion-icon size="large" name="hourglass-outline"></ion-icon>
-            <p>Enter details:</p><br>
+        <div class="deadline">
+            <div class="deadlinetop">
+                <h1 class="drh2">Assign Deadlines</h1><br>
+                <ion-icon size="large" name="hourglass-outline"></ion-icon>
+                <p>Enter details:</p><br>
+            </div>
+
+            <div class="deadlinebot">
+                <form action="/auth/setDeadlines" method="post">
+                    <div class="deadlinemini">
+                        <label class="small-mb-9" for="deadline1">Notification 1</label>
+                        <br>
+                        <textarea name="t1" id="deadline1" rows="9" cols="70"></textarea><br>
+                    </div>
+                    <div class="deadlinemini">
+                        <label class="small-mb-9" for="deadline2">Notification 2</label>
+                        <br>
+                        <textarea name="t2" id="deadline2" rows="9" cols="70"></textarea><br>
+                    </div>
+                    <div class="deadlinemini">
+                        <label class="small-mb-9" for="deadline3">Notification 3</label>
+                        <br>
+                        <textarea name="t3" id="deadline3" rows="9" cols="70"></textarea><br>
+                    </div>
+                    <br><br>
+                    <button class="button-21" type="submit">Assign Deadline</button>
+            </div>
+            </form>
+        </div>
         </div>
 
-        <div class="deadlinebot">
-            <form action="/auth/setDeadlines" method="post">
-                <div class="deadlinemini">
-                    <label class="small-mb-9" for="deadline1">Deadline 1</label>
-                    <br>
-                    <textarea name="t1" id="deadline1" rows="9" cols="70"></textarea><br>
-                </div>
-                <div class="deadlinemini">
-                    <label class="small-mb-9" for="deadline2">Deadline 2</label>
-                    <br>
-                    <textarea name="t2" id="deadline2" rows="9" cols="70"></textarea><br>
-                </div>
-                <div class="deadlinemini">
-                    <label class="small-mb-9" for="deadline3">Deadline 3</label>
-                    <br>
-                    <textarea name="t3" id="deadline3" rows="9" cols="70"></textarea><br>
-                </div>
-                <br><br>
-                <button class="button-21" type="submit">Assign Deadline</button>
-        </div>
-        </form>
-    </div>
-    </div>
+        <section class="wavesec">
+            <div class="waves">
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+                <div class="wave wave4"></div>
+            </div>
+            <div class="toot">
+                <p>©DataBay 2022</p>
+            </div>
+        </section>
 
-    <section class="wavesec">
-        <div class="waves">
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
-            <div class="wave wave4"></div>
-        </div>
-        <div class="toot">
-            <p>©DataBay 2022</p>
-        </div>
-    </section>
+        <script src="/static/index.js"></script>
+        <script src="/static/script.js"></script>
 
-    <script src="/static/script.js"></script>
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

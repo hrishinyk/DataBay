@@ -17,7 +17,7 @@
                 <h3>Name<br><span>Profession</span></h3>
                 <ul>
                     <li>
-                        <a href="/profile">
+                        <a href="/auth/editProfile">
                             <ion-icon name="person-circle-sharp"></ion-icon>My Profile</a>
                     </li>
                     <!-- <li>
@@ -34,30 +34,3 @@
     </nav>
 
 </section>
-<hr class="hrtag">
-<div class="text-box">
-    <marquee>
-        <% if (user) { %>
-            <h1>
-                <%= user.Notification1 %>
-            </h1>
-            <% } %>
-
-    </marquee>
-    <marquee>
-        <% if (user) { %>
-            <h1>
-                <%= user.Notification2 %>
-            </h1>
-            <% } %>
-                <!-- <h1>Notification 2: This is an important message!</h1> -->
-    </marquee>
-    <marquee>
-        <% if (user) { %>
-            <h1>
-                <%= user.Notification3 %>
-            </h1>
-            <% } %>
-                <!-- <h1>Notification 3: This is an important message!</h1> -->
-    </marquee>
-</div>
