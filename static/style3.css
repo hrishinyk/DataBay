@@ -915,3 +915,13 @@ ul {
 .button-21:disabled {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
+
+.onlinelist {
+    margin: 10px 20px;
+    padding: 20px 30px;
+    height: 72px;
+    width: 620px;
+    border: 1px solid black;
+    font-size: 15px;
+    color: black;
+}

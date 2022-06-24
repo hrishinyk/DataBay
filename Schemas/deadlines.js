@@ -15,4 +15,4 @@ const DeadlineSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Deadlines', DeadlineSchema, 'Deadlines');
+module.exports = DeadlineSchema;

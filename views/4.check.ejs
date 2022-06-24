@@ -65,29 +65,45 @@
                             <div class="tempHead">
                                 <h1>CO-PO Mapping</h1>
                             </div>
-                            <input type="checkbox" id="cbx" disabled>
-                            <button class="filebtn"><a href = '/upload'>Upload</a></button>
+                            <% if (check.isUpdated == "true" && check.filename == "CO-PO Mapping.pdf") { %>
+                                <input type="checkbox" id="cbx" value="" checked disabled>
+                                <% } else { %>
+                                    <input type="checkbox" id="cbx" value="" disabled>
+                                    <% } %>
+                                        <button class="filebtn"><a href = '/upload'>Upload</a></button>
                         </div><br>
                         <div class="subfile">
                             <div class="tempHead">
                                 <h1 class="tempHead">Micro-Assessment</h1>
                             </div>
-                            <input type="checkbox" id="cbx" disabled>
-                            <button class="filebtn"><a href='/upload'>Upload</a></button>
+                            <% if (check.isUpdated == "true" && check.filename == "Micro-Assessment.pdf") { %>
+                                <input type="checkbox" id="cbx" value="" checked disabled>
+                                <% } else { %>
+                                    <input type="checkbox" id="cbx" value="" disabled>
+                                    <% } %>
+                                        <button class="filebtn"><a href='/upload'>Upload</a></button>
                         </div><br>
                         <div class="subfile">
                             <div class="tempHead">
                                 <h1 class="tempHead">CO Feedback</h1>
                             </div>
-                            <input type="checkbox" id="cbx" disabled>
-                            <button class="filebtn"><a href='/upload'>Upload</a></button>
+                            <% if (check.isUpdated == "true" && check.filename == "CO Feedback.pdf") { %>
+                                <input type="checkbox" id="cbx" value="" checked disabled>
+                                <% } else { %>
+                                    <input type="checkbox" id="cbx" value="" disabled>
+                                    <% } %>
+                                        <button class="filebtn"><a href='/upload'>Upload</a></button>
                         </div><br>
                         <div class="subfile">
                             <div class="tempHead">
                                 <h1 class="tempHead">NBA Feedback</h1>
                             </div>
-                            <input type="checkbox" id="cbx" disabled>
-                            <button class="filebtn"><a href='/upload'>Upload</a></button></div>
+                            <% if (check.isUpdated == "true" && check.filename == "NBA Feedback.pdf") { %>
+                                <input type="checkbox" id="cbx" value="" checked disabled>
+                                <% } else { %>
+                                    <input type="checkbox" id="cbx" value="" disabled>
+                                    <% } %>
+                                        <button class="filebtn"><a href='/upload'>Upload</a></button></div>
                         <br></div>
 
                 </section>

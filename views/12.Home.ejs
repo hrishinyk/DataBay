@@ -14,17 +14,16 @@
         <!-- <div class="Navbar">
         <nav class="nav" id="nav-menu">
             <ion-icon name="close-outline" class="header__close" id="close-menu"></ion-icon>
-
             <ul class="nav__list">
                 <li class="nav__item">
                     <a href="adminHome" class="nav__link">
                         <ion-icon name="home-outline"></ion-icon>&nbspHOME</a>
                 </li>
-                <li class="nav__item"><a href="/adminfaq" class="nav__link">FAQ</a></li>
-                <li class="nav__item"><a href="/adminabout" class="nav__link">ABOUT</a></li>
-                <li class="nav__item"><a href="/adminchat" class="nav__link">CHATBOX</a></li>
-                <li class="nav__item"><a href="/deadlines" class="nav__link">DEADLINES</a></li>
-                <li class="nav__item"><a href="/createAcc" class="nav__link">CREATE ACCOUNT</a></li>
+                <li class="nav_item"><a href="/adminfaq" class="nav_link">FAQ</a></li>
+                <li class="nav_item"><a href="/adminabout" class="nav_link">ABOUT</a></li>
+                <li class="nav_item"><a href="/adminchat" class="nav_link">CHATBOX</a></li>
+                <li class="nav_item"><a href="/deadlines" class="nav_link">DEADLINES</a></li>
+                <li class="nav_item"><a href="/createAcc" class="nav_link">CREATE ACCOUNT</a></li>
             </ul>
             <div class="action">
                 <div class="profile" onclick="menuToggle();">
@@ -45,7 +44,6 @@
                 </div>
             </div>
         </nav>
-
         <ion-icon name="menu-outline" class="header__toggle" id="toggle-menu"></ion-icon>
         <div class="logo">
             <img src="/static/Databay LogoW.png" alt="">
@@ -62,8 +60,8 @@
                     <p>Select your requirements:</p><br>
                 </div>
                 <div class="dataformbot">
-                    <form>
-                        <label for="Year">Select Year:</label>
+                    <form action="/auth/retrieve" method="post" target="_blank">
+                        <!-- <label for="Year">Select Year:</label>
                         <select name="Year" id="Year" class="DataSel">
                         <option selected disabled>Select</option>
                         <option value="year1" siz>Ist Year</option>
@@ -71,7 +69,7 @@
                         <option value="year3">IIIrd Year</option>
                         <option value="year4">IVth Year</option>
                         </select>
-                        <br><br>
+                        <br><br> -->
                         <label for="Semester">Select Semester:</label>
                         <select name="Semester" id="Semester" class="DataSel">
                         <option selected disabled>Select</option>    
@@ -99,14 +97,14 @@
                         <label for="Doc">Select Document:</label>
                         <select name="Doc" id="Doc" class="DataSel">
                         <option selected disabled>Select</option>    
-                        <option value="Doc1">Micro Assessment</option>
-                        <option value="Doc2">CO-PO Mapping</option>
-                        <option value="Doc3">CO Feedback</option>
-                        <option value="Doc4">NBA Feedback</option>
+                        <option value="Micro-Assessment.pdf">Micro Assessment</option>
+                        <option value="CO-PO Mapping.pdf">CO-PO Mapping</option>
+                        <option value="CO Feedback.pdf">CO Feedback</option>
+                        <option value="NBA Feedback.pdf">NBA Feedback</option>
                         </select>
                         <br><br>
-                        <button type="submit" value="Submit" class="sub">Submit</button>
-                        <button type="reset" value="Reset" class="res">Reset</button>
+                        <input type="submit" value="Submit" class="sub">
+                        <input type="reset" value="Reset" class="res">
                     </form>
                 </div>
             </div>
@@ -118,27 +116,20 @@
                 </div>
                 <div class="onlinebot">
                     <ol class="onlineusers">
-                        <li>
-                            <% if (user) { %>
-                                <%= user[0].Fname+user[0].Lname %>
-                                    <% } %>
-                        </li>
-                        <li>
-                            <% if (user) { %>
-                                <%= user[0].Fname+user[1].Lname %>
-                                    <% } %>
-                        </li>
-                        <li>
-                            <% if (user) { %>
-                                <%= user[0].Fname+user[2].Lname %>
-                                    <% } %>
-                        </li>
-                        <!-- <li><% if (user) { %>
-                    <%= user[0].Fname+user[0].Lname %>
-                        <% } %></li>
-                <li><% if (user) { %>
-                    <%= user[0].Fname+user[0].Lname %>
-                        <% } %></li> -->
+                        <div class="onlinelist">
+                            <li>
+                                <% if (user) { %>
+                                    <%= user[0].Fname+user[0].Lname %>
+                                        <% } %>
+                            </li>
+                        </div>
+                        <div class="onlinelist">
+                            <li>
+                                <% if (user) { %>
+                                    <%= user[1].Fname+user[1].Lname %>
+                                        <% } %>
+                            </li>
+                        </div>
                     </ol>
                 </div>
             </div>

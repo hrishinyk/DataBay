@@ -1,45 +1,82 @@
-const LoginModel = require("../Schemas/login");
-const DeadlinesModel = require("../Schemas/deadlines");
+// const LoginModel = require("../Schemas/login");
+// const DeadlinesModel = require("../Schemas/deadlines");
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const util = require('util');
 const json = require("json");
 const methodOverride = require('method-override');
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+const { GridFsStorage } = require('multer-gridfs-storage');
 const fs = require('fs');
-// express = require('express');
-// const app = express();
-// const mysql = require('mysql');
-const { emit } = require('nodemon');
-// app.use(express.json());
-// app.use(express.urlencoded());
-// app.use(cors());
+const Grid = require('gridfs-stream');
+// import { createReadStream } from 'fs';
+const mongoose_gridfs = require('mongoose-gridfs');
+// import { createModel } from 'mongoose-gridfs';
+var crypto = require('crypto');
+
 const mongoose = require('mongoose');
 const path = require('path');
 const deadlines = require("../Schemas/deadlines");
+// mongoose.connect(url, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     autoIndex: true,
+// });
 var url = "mongodb+srv://admin:mypassword@databay.tv5wy.mongodb.net/DataBay?retryWrites=true&w=majority";
-mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    autoIndex: true,
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function() {
+const conn = mongoose.createConnection(url);
+// const conn = mongoose.connection;
+conn.on("error", console.error.bind(console, "connection error: "));
+conn.once("open", () => {
     console.log("Connected to database successfully");
 });
 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
+// global.notification = {};
+// global.u = {};
+
+const LoginModel = conn.model('LoginModel', require('../schemas/login'));
+const DeadlinesModel = conn.model('DeadlinesModel', require('../schemas/deadlines'));
+const UploadModel = conn.model('UploadModel', require('../schemas/uploads'));
+// let gfs;
+
+let gfs, gridfsBucket;
+conn.once('open', () => {
+    gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads'
+    });
+
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('uploads');
+})
+
+// conn.once('open', () => {
+//     // Init stream
+//     gfs = Grid(conn.db, mongoose.mongo);
+//     gfs.collection('uploads');
+// });
+
+// let bucket = new mongoose.mongo.GridFSBucket(conn.db, {
+//     bucketName: "uploads"
+// });
+// console.log(bucket);
+
+// Create storage engine
+const storage = new GridFsStorage({
+    url: url,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            const filename = file.originalname;
+            const fileInfo = {
+                filename: filename,
+                bucketName: 'uploads',
+                metadata: req.cookies.uploadData,
+            };
+            resolve(fileInfo);
+        });
     }
 });
+const upload = multer({ storage });
 
-var upload = multer({ storage: storage });
+module.exports.upload = upload;
 
 
 module.exports.login = (req, res) => {
@@ -52,8 +89,8 @@ module.exports.login = (req, res) => {
             email: email1
         })
         .then(doc => {
+            // console.log(doc);
             if (doc.length > 0) {
-                // console.log(doc);
                 // console.log(doc[0].name);
                 var pass = doc[0].password;
                 if (pass == password && doc[0].isAdmin == "false") {
@@ -64,7 +101,7 @@ module.exports.login = (req, res) => {
                         expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
                         httpOnly: true
                     }
-                    res.cookie('jwt', token, cookieoption).redirect('profile');
+                    res.cookie('jwt', token, cookieoption).redirect('/auth/profile');
                 } else {
                     res.render(path.join(__dirname, '../views/404-F.ejs'));
                     // res.render('index', { message: 'Incorrect Credentials', color: '<div class="alert alert-danger" role="alert">' });
@@ -104,15 +141,6 @@ module.exports.isLogIn = async(req, res, next) => {
                         return next();
                     }
                 })
-                // sql = 'select * from users_details where id = ?';
-                // db.query(sql, [decoded.id], (err, result) => {
-                //     if (result.length > 0) {
-                //         req.data = result[0];
-                //         return next();
-                //     } else {
-                //         return next();
-                //     }
-                // })
         } catch (err) {
             // err
             if (err) {
@@ -259,32 +287,52 @@ module.exports.selectBranch = (req, res) => {
 }
 
 module.exports.getData = (req, res) => {
-    console.log(req.body);
+    // res.json({ file: req.file });
+    // console.log(req.cookies.uploadData.branch);
+    // console.log(req.file.filename)
+
+    DeadlinesModel.find({
+            type: "deadlines"
+        })
+        .then(doc => {
+            // console.log(doc);
+            notification = {
+                    Notification1: doc[0].Notification1,
+                    Notification2: doc[0].Notification2,
+                    Notification3: doc[0].Notification3,
+                }
+                // res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u });
+        })
+
+
+    var query = { branch: req.cookies.uploadData.branch, semester: req.cookies.uploadData.semester, filename: req.file.filename },
+        update = { isUpdated: "true" },
+        options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+    UploadModel.findOneAndUpdate(query, update, options, function(error, result) {
+        if (!error) {
+            // If the document doesn't exist
+            if (!result) {
+                // Create it
+                result = new UploadModel();
+            }
+            // Save the document
+            result.save(function(error) {
+                if (!error) {
+                    u = {
+                        isUpdated: result.isUpdated,
+                        filename: req.file.filename,
+                    }
+                    res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { check: u, user: notification });
+                } else {
+                    throw error;
+                }
+            });
+        }
+    });
 }
 
 module.exports.setDeadlines = (req, res) => {
-    // var oldCookie = req.cookies.deadlines;
-    // var newCookie = {
-    //     Notification1: req.body.t1,
-    //     Notification2: req.body.t2,
-    //     Notification3: req.body.t3
-    // }
-    // if (oldCookie === undefined) {
-    //     res.cookie('deadlines', newCookie);
-    // } else if (oldCookie !== newCookie) {
-    //     // The following line doesn't work.
-    //     //res.cookie('lang', currentLang , { maxAge: 900000, httpOnly: false });
-    //     // Neither this line updates the value.
-    //     res.cookies.deadlines = newCookie;
-    // }
-
-    // let deadlines = {
-    //     Notification1: req.body.t1,
-    //     Notification2: req.body.t2,
-    //     Notification3: req.body.t3
-    // }
-    // res.cookie("deadlines", deadlines);
-
     const query = { type: "deadlines" };
     DeadlinesModel.findOneAndUpdate(query, { Notification1: req.body.t1, Notification2: req.body.t2, Notification3: req.body.t3 }, { upsert: true }, function(err, doc) {
         if (err) return res.send(500, { error: err });
@@ -309,18 +357,46 @@ module.exports.printHomeDeadlines = (req, res) => {
 }
 
 module.exports.printCheckDeadlines = (req, res) => {
+    // console.log(req.cookies);
+    // let notification, u;
+    // var temp1 = {},
+    //     temp2 = {};
     DeadlinesModel.find({
             type: "deadlines"
         })
         .then(doc => {
             // console.log(doc);
-            u = {
+            notification = {
                 Notification1: doc[0].Notification1,
                 Notification2: doc[0].Notification2,
                 Notification3: doc[0].Notification3,
             }
-            res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { user: u });
+            UploadModel.find({
+                    branch: req.cookies.uploadData.branch,
+                    semester: req.cookies.uploadData.semester,
+                })
+                .then(doc => {
+                    if (doc.length == 0 || doc == undefined) {
+                        // console.log("here");
+                        u = {
+                            isUpdated: "false",
+                            filename: ""
+                        }
+                        res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { user: notification, check: u });
+                    }
+                    // console.log(doc);
+                    else {
+                        u = {
+                            isUpdated: doc[0].isUpdated,
+                            filename: doc[0].filename,
+                        }
+                        res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { user: notification, check: u });
+                    }
+                })
         })
+
+    // console.log(temp1);
+    // console.log(temp2);
 }
 
 module.exports.createAcc = (req, res) => {
@@ -340,15 +416,37 @@ module.exports.createAcc = (req, res) => {
 module.exports.changeDetails = (req, res) => {
     const query = { email: req.data.email };
     LoginModel.findOneAndUpdate(query, {
-        Fname: req.body.Fname.trim(),
-        Lname: req.body.Lname.trim(),
-        secretKey: req.body.secretKey.trim(),
+        Fname: req.body.Fname,
+        Lname: req.body.Lname,
+        secretKey: req.body.secretKey,
         isUpdated: "true"
     }, { upsert: true }, function(err, doc) {
         if (err) return res.send(500, { error: err });
         res.redirect('/auth/index');
         // return res.send('Succesfully saved.');
     });
+}
+
+module.exports.retrieve = (req, res) => {
+    // console.log(req.body);
+
+    // console.log("here");
+    gfs.files.findOne({
+        filename: req.body.Doc
+    }, (err, file) => {
+        if (!file || file.length === 0) {
+            return res.status(404).send("error");
+        }
+
+        if (file.contentType === 'application/pdf') {
+            const readStream = gridfsBucket.openDownloadStream(file._id);
+            readStream.pipe(res);
+            // const readStream = gfs.createReadStream(file.filename);
+            // readStream.pipe(res);
+        } else {
+            res.status(404).send("Error")
+        }
+    })
 }
 
 module.exports.activeUsers = (req, res) => {

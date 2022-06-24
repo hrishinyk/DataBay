@@ -13,16 +13,17 @@
     <div class="uploadbox">
         <div class="uploadboxout">
             <h2>DataBay File Upload</h2>
-            <i class="fas fa-cloud-upload-alt" id="cloud"></i>
-            <div class="uploadboxin">
-                <form>
-                    <input type="file" class="customfile">
+            <!-- <i class="fas fa-cloud-upload-alt" id="cloud"></i> -->
+            <form action="/auth/getData" method="post" enctype="multipart/form-data">
+                <div class="uploadboxin">
+                    <input type="file" name="file" id="file" class="customfile">
                     <br><br>
-                    <p class="area52">Browse File to Upload
-                        <p>
-            </div>
-            <button class="button-17" type="submit" value="Submit">Upload</button>
-            <button class="button-18" type="reset" value="Reset">Reset</button>
+                    <label class="area52" for="file">Browse File to Upload</label>
+                    <!-- <p class="area52">Browse File to Upload
+                        <p> -->
+                </div>
+                <input class="button-17" type="submit" value="Upload">
+                <input class="button-18" type="reset" value="Reset">
             </form>
         </div>
     </div>

@@ -30,13 +30,11 @@ const loginSchema = new mongoose.Schema({
     secretKey: {
         type: String,
     },
-    img: {
-        data: Buffer,
-        contentType: String
-    },
     loggedIn: {
         type: String,
     },
 });
 
-module.exports = mongoose.model('Login', loginSchema, 'Login');
+module.exports = loginSchema;
+
+// module.exports = mongoose.model('Login', loginSchema, 'Login');

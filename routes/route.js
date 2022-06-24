@@ -48,7 +48,8 @@ router.get('/about', (req, res) => {
 })
 
 router.get('/chatbox', (req, res) => {
-    res.status(200).render(path.join(__dirname, '../views/15.Chatbox.ejs'))
+    res.render(path.join(__dirname, '../views/15.Chatbox.ejs'), { link: 'http://localhost:3000/login' });
+    // res.status(200).render(path.join(__dirname, '../views/15.Chatbox.ejs'))
 })
 
 // router.get('/adminHome', (req, res) => {

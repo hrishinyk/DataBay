@@ -8,7 +8,8 @@ const authController = require('./controller/control');
 const path = require('path')
 const methodOverride = require('method-override');
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+// const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 
 // const storage = new GridFsStorage({
 //     url: config.mongoURI,
@@ -31,10 +32,10 @@ const GridFsStorage = require('multer-gridfs-storage');
 // });
 // const upload = multer({ storage });
 
-
 app.use(cookies());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 
 app.set('view engine', 'ejs');
 
