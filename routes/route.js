@@ -84,6 +84,10 @@ router.get('/forgotpass', (req, res) => {
     res.status(200).render(path.join(__dirname, '../views/9.ForgotPass.ejs'))
 })
 
+router.get('/facultyMap', (req, res) => {
+    res.status(200).render(path.join(__dirname, '../views/Mapping.ejs'))
+})
+
 // router.get('/docs', (req, res) => {
 //     // res.send(req.cookies);
 //     res.status(200).render(path.join(__dirname, '../views/4.check.ejs'))

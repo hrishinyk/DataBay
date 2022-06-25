@@ -36,6 +36,8 @@ conn.once("open", () => {
 const LoginModel = conn.model('LoginModel', require('../schemas/login'));
 const DeadlinesModel = conn.model('DeadlinesModel', require('../schemas/deadlines'));
 const UploadModel = conn.model('UploadModel', require('../schemas/uploads'));
+const chatUserModel = conn.model('chatUserModel', require('../schemas/chatUser'));
+const MappingModel = conn.model('MappingModel', require('../schemas/mapping'));
 // let gfs;
 
 let gfs, gridfsBucket;
@@ -101,6 +103,12 @@ module.exports.login = (req, res) => {
                         expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
                         httpOnly: true
                     }
+                    const query = { email: req.body.email };
+                    LoginModel.findOneAndUpdate(query, { isLogIn: "true" }, { upsert: true }, function(err, doc) {
+                        if (err) return res.send(500, { error: err });
+                        // res.redirect('/');
+                        // return res.send('Succesfully saved.');
+                    });
                     res.cookie('jwt', token, cookieoption).redirect('/auth/profile');
                 } else {
                     res.render(path.join(__dirname, '../views/404-F.ejs'));
@@ -200,6 +208,12 @@ module.exports.adminLogin = (req, res) => {
 }
 
 module.exports.signout = (req, res) => {
+    const query = { email: req.data.email };
+    LoginModel.findOneAndUpdate(query, { isLogIn: "false" }, { upsert: true }, function(err, doc) {
+        if (err) return res.send(500, { error: err });
+        // res.redirect('/');
+        // return res.send('Succesfully saved.');
+    });
     res.cookie('jwt', 'logout', {
         expires: new Date(Date.now() + 2 * 1000),
         httpOnly: true
@@ -220,6 +234,8 @@ module.exports.forgotPassword = (req, res) => {
                         res.redirect('/');
                         // return res.send('Succesfully saved.');
                     });
+                } else {
+                    res.render(path.join(__dirname, '../views/404-P.ejs'));
                 }
             }
         })
@@ -258,7 +274,24 @@ module.exports.renderProfile = (req, res) => {
                     Notification2: doc[0].Notification2,
                     Notification3: doc[0].Notification3,
                 }
-                res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u });
+
+                MappingModel.find({
+                        email: req.data.email
+                    })
+                    .then(doc => {
+                        if (doc.length == 0 || doc == undefined) {
+                            map = {};
+                        } else {
+                            m = {
+                                branch: doc[0].branch,
+                                semester: doc[0].semester,
+                                filename: doc[0].filename,
+                                subject: doc[0].subject,
+                            }
+                            res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u, map: m });
+                        }
+                    })
+                    // res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u });
             })
             // res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: deadlines });
     }
@@ -352,7 +385,23 @@ module.exports.printHomeDeadlines = (req, res) => {
                 Notification2: doc[0].Notification2,
                 Notification3: doc[0].Notification3,
             }
-            res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u });
+
+            MappingModel.find({
+                    email: req.data.email
+                })
+                .then(doc => {
+                    if (doc.length == 0 || doc == undefined) {
+                        map = {};
+                    } else {
+                        m = {
+                            branch: doc[0].branch,
+                            semester: doc[0].semester,
+                            filename: doc[0].filename,
+                            subject: doc[0].subject,
+                        }
+                        res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u, map: m });
+                    }
+                })
         })
 }
 
@@ -410,7 +459,13 @@ module.exports.createAcc = (req, res) => {
         isAdmin: req.body.type,
         secretKey: ""
     });
-    res.redirect('/adminHome');
+
+    chatUserModel.create({
+        username: req.body.email,
+        email: req.body.email,
+        password: req.body.password,
+    });
+    res.redirect('/auth/adminHome');
 }
 
 module.exports.changeDetails = (req, res) => {
@@ -459,4 +514,16 @@ module.exports.activeUsers = (req, res) => {
             res.status(200).render(path.join(__dirname, '../views/12.Home.ejs'), { user: u });
             // console.log(doc);
         })
+}
+
+module.exports.mapToFaculty = (req, res) => {
+    console.log(req.body);
+    MappingModel.create({
+        email: req.body.email,
+        branch: req.body.branch,
+        semester: req.body.semester,
+        filename: req.body.Doc,
+        subject: req.body.subject,
+    });
+    res.status(200).redirect('/auth/adminHome');
 }

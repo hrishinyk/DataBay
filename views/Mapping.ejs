@@ -16,11 +16,11 @@
                 <h2 class="Notifytxt">Faculty Mapping</h2>
             </div>
             <div class="Notifybot">
-                <form action="/auth/forgotpassword" method="post">
+                <form action="/auth/mapToFaculty" method="post">
 
                     <div class="Notifymini">
                         <label for="email">Enter faculty email:</label>
-                        <input type="email" id="email" name="email">
+                        <input type="text" id="email" name="email">
                     </div>
                     <div class="Notifymini">
                         <label for="Branch">Select Branch:</label>
@@ -52,11 +52,15 @@
                         <label for="Doc">Select Document:</label>
                         <select name="Doc" id="Doc" class="DataSel">
                         <option selected disabled>Select</option>    
-                        <option value="Doc1">Micro Assessment</option>
-                        <option value="Doc2">CO-PO Mapping</option>
-                        <option value="Doc3">CO Feedback</option>
-                        <option value="Doc4">NBA Feedback</option>
+                        <option value="Micro-Assessment">Micro Assessment</option>
+                        <option value="CO-PO Mapping">CO-PO Mapping</option>
+                        <option value="CO Feedback">CO Feedback</option>
+                        <option value="NBA Feedback">NBA Feedback</option>
                         </select>
+                    </div>
+                    <div class="Notifymini">
+                        <label for="subject">Enter the Subject Name:</label>
+                        <input type="text" id="subject" name="subject">
                     </div>
                     <br>
                     <input class="button-69" type="submit" value="Notify">

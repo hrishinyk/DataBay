@@ -1391,3 +1391,19 @@ svg {
 .button-16:disabled {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
 }
+
+.Todolist {
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    height: 150px;
+    width: 800px;
+    margin-left: 350px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: orange;
+}
+
+.todotxt {
+    font-size: 20px;
+}

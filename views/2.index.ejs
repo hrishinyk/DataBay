@@ -57,6 +57,15 @@
     </div> -->
         <%- include('partials/deadlines'); %>
             <hr class="hrtag">
+            <div class="Todolist">
+                <% if (map) { %>
+                    <p class="todotxt">
+                        <%= "You have been allotted " + map.filename %>
+                    </p>
+                    <% } else { %>
+                        <p class="todotxt">Nothing allotted yet</p>
+                        <% } %>
+            </div>
             <div class="filler">
                 <div class="semester1">
                     <div class="container">
@@ -121,21 +130,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-<!-- <body>
-    <%- include('partials/head'); %>
-        <hr class="hrtag">
-        <div class="filler">
-            <div class="semester1">
-                <div class="container">
-                    <button class="click">Select Semester</button>
-                    <div class="list">
-                        <button class="links"> <a href="/branch">Semester 1</a></button>
-                        <button class="links"><a href="/branch">Semester 2</a></button>
-                    </div>
-                </div> -->

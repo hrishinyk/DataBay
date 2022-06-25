@@ -25,6 +25,7 @@ router.post('/createAcc', urlencodedParser, authController.createAcc);
 router.get('/editProfile', authController.isLogIn, authController.editProfile);
 router.post('/changeDetails', urlencodedParser, authController.isLogIn, authController.changeDetails);
 router.get('/docs', authController.isLogIn, authController.printCheckDeadlines);
+router.post('/mapToFaculty', urlencodedParser, authController.mapToFaculty);
 // router.get('/docs', (req, res) => {
 //     res.send(req.cookies.uploadData);
 // })
