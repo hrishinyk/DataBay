@@ -718,12 +718,16 @@ ul {
 
 .questions-container {
     max-width: 1000px;
-    height: 500px;
+    height: 700px;
     margin: 0 auto;
 }
 
 .question {
     border-bottom: 1px solid #fff;
+}
+
+.tsttxt {
+    font-size: 17px;
 }
 
 .question button {
@@ -1406,4 +1410,10 @@ svg {
 
 .todotxt {
     font-size: 20px;
+}
+
+.abouttxt {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 25px;
 }

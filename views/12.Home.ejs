@@ -116,20 +116,12 @@
                 </div>
                 <div class="onlinebot">
                     <ol class="onlineusers">
-                        <div class="onlinelist">
-                            <li>
-                                <% if (user) { %>
-                                    <%= user[0].Fname+user[0].Lname %>
-                                        <% } %>
-                            </li>
-                        </div>
-                        <div class="onlinelist">
-                            <li>
-                                <% if (user) { %>
-                                    <%= user[1].Fname+user[1].Lname %>
-                                        <% } %>
-                            </li>
-                        </div>
+                        <% for(var i=0; i < user.length; i++) { %>
+                            <div class="onlinelist">
+                                <li>
+                                    <%= user[i].Fname + " " + user[0].Lname %>
+                                </li>
+                                    <% } %>
                     </ol>
                 </div>
             </div>

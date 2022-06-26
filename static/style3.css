@@ -512,6 +512,7 @@ label {
     width: 150px;
     background-color: rgb(255, 255, 255);
     transition: .7s;
+    margin-left: 120px;
 }
 
 .DataSel:hover {
@@ -917,13 +918,15 @@ ul {
 }
 
 .onlinelist {
-    margin: 10px 20px;
-    padding: 20px 30px;
+    /* margin: 10px 20px; */
+    /* padding: 20px 30px; */
+    padding-top: 50px;
     height: 72px;
     width: 620px;
     border: 1px solid black;
     font-size: 15px;
     color: black;
+    text-align: center;
 }
 
 .Notify {
@@ -1096,4 +1099,10 @@ ul {
 
 .button-70:disabled {
     box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.abouttxt {
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 25px;
 }

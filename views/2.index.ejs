@@ -58,7 +58,7 @@
         <%- include('partials/deadlines'); %>
             <hr class="hrtag">
             <div class="Todolist">
-                <% if (map) { %>
+                <% if (map.filename != undefined) { %>
                     <p class="todotxt">
                         <%= "You have been allotted " + map.filename %>
                     </p>

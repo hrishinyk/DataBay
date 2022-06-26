@@ -104,7 +104,7 @@ module.exports.login = (req, res) => {
                         httpOnly: true
                     }
                     const query = { email: req.body.email };
-                    LoginModel.findOneAndUpdate(query, { isLogIn: "true" }, { upsert: true }, function(err, doc) {
+                    LoginModel.findOneAndUpdate(query, { loggedIn: "true" }, { upsert: true }, function(err, doc) {
                         if (err) return res.send(500, { error: err });
                         // res.redirect('/');
                         // return res.send('Succesfully saved.');
@@ -207,9 +207,12 @@ module.exports.adminLogin = (req, res) => {
         })
 }
 
-module.exports.signout = (req, res) => {
-    const query = { email: req.data.email };
-    LoginModel.findOneAndUpdate(query, { isLogIn: "false" }, { upsert: true }, function(err, doc) {
+module.exports.signout = async(req, res) => {
+    token = req.cookies.jwt;
+            // console.log(token);
+            var decoded = await util.promisify(jwt.verify)(token, 'mysecretpassword');
+    const query = { email: decoded.email };
+    LoginModel.findOneAndUpdate(query, { loggedIn: "false" }, { upsert: true }, function(err, doc) {
         if (err) return res.send(500, { error: err });
         // res.redirect('/');
         // return res.send('Succesfully saved.');
@@ -334,35 +337,35 @@ module.exports.getData = (req, res) => {
                     Notification2: doc[0].Notification2,
                     Notification3: doc[0].Notification3,
                 }
+                var query = { branch: req.cookies.uploadData.branch, semester: req.cookies.uploadData.semester, filename: req.file.filename },
+                    update = { isUpdated: "true" },
+                    options = { upsert: true, new: true, setDefaultsOnInsert: true };
+                    UploadModel.findOneAndUpdate(query, update, options, function(error, result) {
+                        if (!error) {
+                            // If the document doesn't exist
+                            if (!result) {
+                                // Create it
+                                result = new UploadModel();
+                            }
+                            // Save the document
+                            result.save(function(error) {
+                                if (!error) {
+                                    u = {
+                                        isUpdated: result.isUpdated,
+                                        filename: req.file.filename,
+                                    }
+                                    res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { check: u, user: notification });
+                                } else {
+                                    throw error;
+                                }
+                            });
+                        }
+                    });
                 // res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u });
         })
 
 
-    var query = { branch: req.cookies.uploadData.branch, semester: req.cookies.uploadData.semester, filename: req.file.filename },
-        update = { isUpdated: "true" },
-        options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-    UploadModel.findOneAndUpdate(query, update, options, function(error, result) {
-        if (!error) {
-            // If the document doesn't exist
-            if (!result) {
-                // Create it
-                result = new UploadModel();
-            }
-            // Save the document
-            result.save(function(error) {
-                if (!error) {
-                    u = {
-                        isUpdated: result.isUpdated,
-                        filename: req.file.filename,
-                    }
-                    res.status(200).render(path.join(__dirname, '../views/4.check.ejs'), { check: u, user: notification });
-                } else {
-                    throw error;
-                }
-            });
-        }
-    });
 }
 
 module.exports.setDeadlines = (req, res) => {
@@ -391,7 +394,8 @@ module.exports.printHomeDeadlines = (req, res) => {
                 })
                 .then(doc => {
                     if (doc.length == 0 || doc == undefined) {
-                        map = {};
+                        m = {};
+                        res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u, map: m });
                     } else {
                         m = {
                             branch: doc[0].branch,
@@ -399,6 +403,7 @@ module.exports.printHomeDeadlines = (req, res) => {
                             filename: doc[0].filename,
                             subject: doc[0].subject,
                         }
+                        console.log(m);
                         res.status(200).render(path.join(__dirname, '../views/2.index.ejs'), { user: u, map: m });
                     }
                 })
@@ -506,7 +511,7 @@ module.exports.retrieve = (req, res) => {
 
 module.exports.activeUsers = (req, res) => {
     LoginModel.find({
-            loggedIn: "false",
+            loggedIn: "true",
             // isAdmin: "false"
         })
         .then(doc => {
